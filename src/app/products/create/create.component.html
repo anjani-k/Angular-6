@@ -1,0 +1,47 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Template Driven Forms</div>
+  <div class="panel-body">
+<form #userForm="ngForm">
+  <div class="form-group">
+    <label class="control-label">
+    Firstname
+    </label>
+    <input type="text" required minlength="5" class="form-control" 
+    placeholder="firstname" #firstnameVar="ngModel" 
+    [(ngModel)]="user.firstname" name="firstname"/>
+
+    <div *ngIf="!firstnameVar.valid && (firstnameVar.touched)">
+      <div class="alert alert-danger" *ngIf="firstnameVar.errors.required">Please enter firstName</div>
+      <div class="alert alert-danger" *ngIf="firstnameVar.errors.minlength">firstName should be 5 charaters long</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label">
+      LastName
+    </label>
+    <input type="text" required minlength="5" class="form-control" 
+    placeholder="Lastname" #lastnameVar="ngModel"
+     [(ngModel)]="user.lastname" name="lastname"/>
+     <div *ngIf="!lastnameVar.valid && (lastnameVar.touched)">
+      <div class="alert alert-danger" *ngIf="lastnameVar.errors.required">Please enter lastName</div>
+      <div class="alert alert-danger" *ngIf="lastnameVar.errors.minlength">lastName should be 5 characters long</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label">
+      Email
+    </label>
+    <input type="text" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" 
+    placeholder="Email" #emailVar="ngModel" 
+    [(ngModel)]="user.email" name="email"/>
+    <div *ngIf="!emailVar.valid && (emailVar.touched)">
+      <div class="alert alert-danger" *ngIf="emailVar.errors.required">Please enter Email</div>
+      <div class="alert alert-danger" *ngIf="emailVar.errors.pattern">Enter a valid Email</div>
+    </div>
+  </div>
+
+  <button class="btn btn-success" [disabled]="!userForm.valid">Create</button>
+</form>
+
+  </div>
+</div>
